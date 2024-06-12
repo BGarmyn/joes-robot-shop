@@ -9,6 +9,7 @@ import { IProduct } from './product.model';
 export class CatalogComponent {
   products: any;
   filter: string = '';
+  cart: IProduct[] = [];
 
   constructor() {
     this.products = [
@@ -188,16 +189,16 @@ export class CatalogComponent {
     ];
   }
 
-  getImageUrl(product: IProduct) {
-    if (!product) return '';
-    return '/assets/images/robot-parts/' + product.imageName;
-  }
-
   getFilteredProducts() {
     return this.filter === ''
       ? this.products
       : this.products.filter(
           (product: any) => product.category === this.filter
         );
+  }
+
+  addToCart(product: IProduct) {
+    this.cart.push(product);
+    console.log(`product ${product.name} added to cart`);
   }
 }
